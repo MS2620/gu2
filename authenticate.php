@@ -24,7 +24,6 @@
       $_SESSION['username'] = $row['username'];
       $_SESSION['email'] = $row['email'];
       echo "<script>document.location.href = 'index.php'</script>";
-//      header ("Location: index.php");
     }else {
       echo "<script>alert('Email or password is incorrect, please try again.');
                 document.location.href = 'index.php';
