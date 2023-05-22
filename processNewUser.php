@@ -6,18 +6,15 @@
 
 <?php
 
-require "dbaccess.php";
-$pfp = $_POST['pfp'];
+$pfp = "default.png";
 $email = $_POST['email'];
 $username = $_POST['username'];
 $password = $_POST['password1'];
 $password1 = $_POST['password2'];
 $hash = password_hash( $password, PASSWORD_DEFAULT);
-$background = $_POST['background_img'];
-$audio = $_POST['audio'];
+$background = "defaultbg.jpg";
 
 $isValid = true;
-//form validation to be added
 
 if ($password != $password1){
   $isValid = false;
@@ -52,14 +49,14 @@ if ($result->num_rows > 0){
 
 if ($isValid == true){
 
-  $stmt = $conn->prepare("INSERT INTO gu_users (email, username, password, profilePic, background, audio)
-  VALUES (?,?,?,?,?,?)");
+  $stmt = $conn->prepare("INSERT INTO gu_users (email, username, password, profilePic, background)
+  VALUES (?,?,?,?,?)");
 
-  $stmt->bind_param("ssssss", $email, $username, $hash, $pfp, $background, $audio);
+  $stmt->bind_param("sssss", $email, $username, $hash, $pfp, $background);
 
   if ($stmt->execute() == true){
       $lastId = $stmt->insert_id;
-      echo "<p>A new record has been created for your account. Your customer ID is: $lastId </p>";
+      echo "<script>alert('A new record has been created for your account. Your customer ID is: $lastId'); document.location.href = 'index.php'; </script>";
     } else {
       echo "Something went wrong.";
     }
