@@ -6,7 +6,7 @@
 
 <?php
   $sessionId = $_SESSION["userId"];
-  $user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM gu_users WHERE user_id = $sessionId"));
+  $user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE user_id = $sessionId"));
   $id = $user["user_id"];
   $email = $user["email"];
   $username = $user["username"];
@@ -69,7 +69,7 @@
 
 <!--  Posts-->
   <?php
-  $stmt2 = $conn->prepare("SELECT * FROM gu_posts p LEFT JOIN gu_comments c ON p.post_id = c.p_post_id WHERE p.p_user_id = $sessionId ORDER BY p.post_id DESC");
+  $stmt2 = $conn->prepare("SELECT * FROM posts p LEFT JOIN comments c ON p.post_id = c.p_post_id WHERE p.p_user_id = $sessionId ORDER BY p.post_id DESC");
   $stmt2->execute();
   $result2 = $stmt2->get_result();
   if ($result2->num_rows > 0){
@@ -126,7 +126,7 @@
       else{
         $newImageName = $name . " - " . date("Y.m.d") . " - " . date("h.i.sa"); // Generate new image name
         $newImageName .= '.' . $imageExtension;
-        $query = "UPDATE gu_users SET profilePic = '$newImageName' WHERE user_id = $id";
+        $query = "UPDATE users SET profilePic = '$newImageName' WHERE user_id = $id";
         mysqli_query($conn, $query);
         move_uploaded_file($tmpName, 'images/' . $newImageName);
         echo
@@ -166,7 +166,7 @@
       else{
         $newImageName = $name . " - " . date("Y.m.d") . " - " . date("h.i.sa"); // Generate new image name
         $newImageName .= '.' . $imageExtension;
-        $query = "UPDATE gu_users SET background = '$newImageName' WHERE user_id = $id";
+        $query = "UPDATE users SET background = '$newImageName' WHERE user_id = $id";
         mysqli_query($conn, $query);
         move_uploaded_file($tmpName2, 'images/' . $newImageName);
         echo
@@ -205,7 +205,7 @@
       else{
         $newAudioName = $name . " - " . date("Y.m.d") . " - " . date("h.i.sa"); // Generate new image name
         $newAudioName .= '.' . $audioExtension;
-        $query = "UPDATE gu_users SET audio = '$newAudioName' WHERE user_id = $id";
+        $query = "UPDATE users SET audio = '$newAudioName' WHERE user_id = $id";
         echo "console.log(\"Uploaded\")";
         mysqli_query($conn, $query);
         move_uploaded_file($tmpName3, 'audio/' . $newAudioName);

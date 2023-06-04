@@ -1,9 +1,9 @@
 <?php
 
-$servername = "comp-server.uhi.ac.uk";
-$username = "sql08013495";
-$password = "sql08013495";
-$database = "sql08013495";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "nostalgia";
 
 $conn = new mysqli($servername, $username, $password, $database);
 

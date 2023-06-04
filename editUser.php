@@ -3,7 +3,7 @@
 require 'header.php';
 
 $sessionId = $_SESSION["userId"];
-$user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM gu_users WHERE user_id = $sessionId"));
+$user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE user_id = $sessionId"));
 $id = $user["user_id"];
 $email = $user["email"];
 $username = $user["username"];

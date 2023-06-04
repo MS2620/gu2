@@ -36,7 +36,7 @@ if ($result->num_rows > 0){
   $isValid = false;
 }
 
-$stmt = $conn->prepare("SELECT email FROM gu_users WHERE email = ?");
+$stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -49,7 +49,7 @@ if ($result->num_rows > 0){
 
 if ($isValid == true){
 
-  $stmt = $conn->prepare("INSERT INTO gu_users (email, username, password, profilePic, background)
+  $stmt = $conn->prepare("INSERT INTO users (email, username, password, profilePic, background)
   VALUES (?,?,?,?,?)");
 
   $stmt->bind_param("sssss", $email, $username, $hash, $pfp, $background);
